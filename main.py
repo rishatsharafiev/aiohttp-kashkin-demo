@@ -1,12 +1,63 @@
+import argparse
 import logging
+
 import aiohttp
-
 from src import create_app
+from src.settings import load_config
+
+# uvloop
+try:
+    import uvloop
+    uvloop.install()
+except ImportError:
+    print('uvloop is not available')
 
 
-logging.basicConfig(level=logging.DEBUG)
-app = create_app()
 
+# argument parser
+parser = argparse.ArgumentParser(description='Demo project')
+parser.add_argument(
+    '--host',
+    help='Host to listen',
+    default='0.0.0.0'
+)
+parser.add_argument(
+    '--port',
+    help='Port to accept connections',
+    default='5000'
+)
+parser.add_argument(
+    '--reload',
+    action='store_true',
+    help='Autoreload code on change'
+)
+parser.add_argument(
+    '--debug',
+    action='store_true',
+    help='Debug code'
+)
+parser.add_argument(
+    '-c',
+    '--config',
+    type=argparse.FileType('r'),
+    help='Path to configuration file'
+)
+
+args = parser.parse_args()
+
+# reload
+if args.reload:
+    print('Start with code reload')
+    import aioreloader
+    aioreloader.start()
+
+# logging
+if args.debug:
+    print('Start with debug')
+    logging.basicConfig(level=logging.DEBUG)
+
+# app
+app = create_app(config=load_config(args.config))
 
 if __name__ == '__main__':
-    aiohttp.web.run_app(app)
+    aiohttp.web.run_app(app, host=args.host, port=args.port)
