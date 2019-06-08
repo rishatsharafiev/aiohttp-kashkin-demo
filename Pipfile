@@ -8,6 +8,7 @@ verify_ssl = true
 [packages]
 aiohttp = "==3.5.4"
 aiohttp-jinja2 = "==1.1.1"
+uvloop = "==0.12.2"
 
 [requires]
 python_version = "3.7"

@@ -5,6 +5,8 @@ from aiohttp import web
 import aiohttp_jinja2
 import jinja2
 
+import uvloop
+
 from .routes import setup_routes
 
 
