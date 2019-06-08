@@ -10,11 +10,13 @@ import uvloop
 from .routes import setup_routes
 
 
-def create_app():
+def create_app(config: dict = None):
     BASE_PATH = pathlib.Path(__file__).parent
     TEMPLATE_PATH = os.path.join(BASE_PATH, 'templates')
 
     app = web.Application()
+
+    app['config'] = config
 
     # routes
     app = setup_routes(app)

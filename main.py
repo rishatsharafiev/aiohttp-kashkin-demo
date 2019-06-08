@@ -3,7 +3,7 @@ import logging
 
 import aiohttp
 from src import create_app
-
+from src.settings import load_config
 
 # uvloop
 try:
@@ -36,6 +36,12 @@ parser.add_argument(
     action='store_true',
     help='Debug code'
 )
+parser.add_argument(
+    '-c',
+    '--config',
+    type=argparse.FileType('r'),
+    help='Path to configuration file'
+)
 
 args = parser.parse_args()
 
@@ -51,7 +57,7 @@ if args.debug:
     logging.basicConfig(level=logging.DEBUG)
 
 # app
-app = create_app()
+app = create_app(config=load_config(args.config))
 
 if __name__ == '__main__':
     aiohttp.web.run_app(app, host=args.host, port=args.port)
