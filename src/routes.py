@@ -1,10 +1,10 @@
 from aiohttp import web
 
-from .views import frontend
+from .views import index
 
 
 def setup_routes(app):
     app.add_routes([
-        web.get('/', frontend.index)
+        web.get('/', index.handler)
     ])
     return app
