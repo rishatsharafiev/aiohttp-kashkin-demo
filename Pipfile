@@ -6,7 +6,7 @@ verify_ssl = true
 [dev-packages]
 
 [packages]
-aiohttp = "==3.5.4"
+aiohttp = "==3.7.4"
 aiohttp-jinja2 = "==1.1.1"
 uvloop = "==0.12.2"
 aioreloader = "==0.2.2"
