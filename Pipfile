@@ -10,7 +10,7 @@ aiohttp = "==3.5.4"
 aiohttp-jinja2 = "==1.1.1"
 uvloop = "==0.12.2"
 aioreloader = "==0.2.2"
-pyyaml = "==5.1.1"
+pyyaml = "==5.4"
 asyncpg = "==0.18.3"
 asyncpgsa = "==0.26.0"
 
